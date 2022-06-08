@@ -81,10 +81,10 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             else {
-                width = Math.floor((500 - (n + 1) * 5 - 4 * n) / n);
-                el.style.setProperty('width', `${width}px`);
-                el.style.setProperty('height', `${width}px`);
-                el.style.setProperty('font-size', `${.9 * width}px`);
+                //width = Math.floor(300 / n);
+                //el.style.setProperty('width', `${width}%`);
+                //el.style.setProperty('height', `${width}%`);
+                //el.style.setProperty('font-size', `${.9 * width}px`);
                 if (gender == "boy") {
                     el.style.backgroundColor = colors['blue'];
                     el.style.borderColor = colors['blue'];
