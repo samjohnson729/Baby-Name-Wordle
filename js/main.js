@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-    solution = "oliver";
+    solution = "jonny";
     gender = "boy";
     n = solution.length;
 
@@ -88,13 +88,23 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (gender == "boy") {
                     el.style.backgroundColor = colors['blue'];
                     el.style.borderColor = colors['blue'];
-                } else {
+                } else if (gender == "girl") {
                     el.style.backgroundColor = colors['pink'];
                     el.style.borderColor = colors['pink'];
                 }
                 
             }
         }
+
+        for (let i = 0; i < solution.length; i++) {
+            const el = document.getElementById(solution[i]);
+            if (gender == "boy") {
+                el.style.backgroundColor = colors['blue'];
+            } else if (gender == "girl") {
+                el.style.backgroundColor = colors['pink'];
+            }
+        }
+
     }
 
     function charCount(letter, word) {
@@ -118,11 +128,13 @@ document.addEventListener("DOMContentLoaded", () => {
             if (!(letter in counts)) {
                 counts[letter] = 0;
             }
-            const el = document.getElementById((currentRow - 1) * n + i + 1);
-
+            const el_board = document.getElementById((currentRow - 1) * n + i + 1);
+            const el_keys = document.getElementById(letter);
+            
             if (letter == solution[i]) {
-                el.style.backgroundColor = colors['green'];
-                el.style.borderColor = colors['green'];
+                el_board.style.backgroundColor = colors['green'];
+                el_board.style.borderColor = colors['green'];
+                el_keys.style.backgroundColor = colors['green'];
                 counts[letter] += 1;
             }
         }
@@ -130,12 +142,14 @@ document.addEventListener("DOMContentLoaded", () => {
         for (let i = 0; i < n; i++) {
 
             letter = currentArray[i];
-            const el = document.getElementById((currentRow - 1) * n + i + 1);
+            const el_board = document.getElementById((currentRow - 1) * n + i + 1);
+            const el_keys = document.getElementById(letter);
 
             /* check for grays */
             if (!solution.includes(letter)) {
-                el.style.backgroundColor = colors['gray'];
-                el.style.borderColor = colors['gray'];
+                el_board.style.backgroundColor = colors['gray'];
+                el_board.style.borderColor = colors['gray'];
+                el_keys.style.backgroundColor = colors['gray'];
             }
 
             /* skip the greens */
@@ -145,14 +159,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
             /* check for yellows */
             else if (counts[letter] < charCount(letter, solution)) {
-                el.style.backgroundColor = colors['yellow'];
-                el.style.borderColor = colors['yellow'];
+                el_board.style.backgroundColor = colors['yellow'];
+                el_board.style.borderColor = colors['yellow'];
+                if (!el_keys.style.backgroundColor) {
+                    el_keys.style.backgroundColor = colors['yellow'];
+                }
                 counts[letter] += 1;
             }
 
             else {
-                el.style.backgroundColor = colors['gray'];
+                el_board.style.backgroundColor = colors['gray'];
             }
+        }
+
+        for (let i = 0; i < keys.length; i++) {
+
         }
         
     }
