@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-    solution = "nadia";
-    gender = "girl";
+    solution = "oliver";
+    gender = "boy";
     n = solution.length;
 
     createSquares();
