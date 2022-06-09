@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-    solution = "jonny";
+    solution = "daniel";
     gender = "boy";
     n = solution.length;
 
