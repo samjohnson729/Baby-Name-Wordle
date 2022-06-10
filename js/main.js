@@ -1,3 +1,10 @@
+// When the user clicks anywhere outside of the modal, close it
+// window.onclick = function(event) {
+//     if (event.target == modal) {
+//         modal.style.display = "none";
+//     }
+// }
+
 document.addEventListener("DOMContentLoaded", () => {
 
     solution = "David";
@@ -45,6 +52,16 @@ document.addEventListener("DOMContentLoaded", () => {
             }
             parent.appendChild(square);
         }
+    }
+
+    function closeHelpModal(){
+        const helpModal = document.getElementsByClassName("modal");
+        helpModal.style.display = "none";
+    }
+
+    function openHelpModal(){
+        const helpModal = document.getElementsByClassName("modal");
+        helpModal.style.display = "block";
     }
 
     function updateCurrentArray(letter) {
