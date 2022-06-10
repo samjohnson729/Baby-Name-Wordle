@@ -28,6 +28,14 @@ body {
 
 header {
     border-bottom: 1px solid rgb(58, 58, 60);
+    display: flex;
+}
+
+button.icon {
+    border: none;
+    cursor: pointer;
+    background: none;
+    padding: 0 4px;
 }
 
 .title {
