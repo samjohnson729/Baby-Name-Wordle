@@ -1,9 +1,20 @@
-// When the user clicks anywhere outside of the modal, close it
-// window.onclick = function(event) {
-//     if (event.target == modal) {
-//         modal.style.display = "none";
-//     }
-// }
+//When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    const helpModal = document.getElementById("helpModalId");
+    if (event.target == helpModal) {
+        helpModal.style.display = "none";
+    }
+}
+
+function closeHelpModal(){
+    const helpModal = document.getElementById("helpModalId");
+    helpModal.style.display = "none";
+}
+
+function openHelpModal(){
+    const helpModal = document.getElementById("helpModalId");
+    helpModal.style.display = "block";
+}
 
 document.addEventListener("DOMContentLoaded", () => {
 
@@ -52,16 +63,6 @@ document.addEventListener("DOMContentLoaded", () => {
             }
             parent.appendChild(square);
         }
-    }
-
-    function closeHelpModal(){
-        const helpModal = document.getElementsByClassName("modal");
-        helpModal.style.display = "none";
-    }
-
-    function openHelpModal(){
-        const helpModal = document.getElementsByClassName("modal");
-        helpModal.style.display = "block";
     }
 
     function updateCurrentArray(letter) {
