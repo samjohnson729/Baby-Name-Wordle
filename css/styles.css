@@ -45,6 +45,7 @@ header {
     align-items: center;
     flex-grow: 1;
     overflow: hidden;
+    flex-direction: column;
 }
 
 #board {
@@ -63,6 +64,14 @@ header {
     font-weight: bold;
     color: gainsboro;
     text-transform: uppercase;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.solution {
+    text-transform: uppercase;
+    color: gainsboro;
     display: flex;
     justify-content: center;
     align-items: center;
