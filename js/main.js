@@ -1,10 +1,11 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-    solution = "daniel";
+    solution = "David";
+    solutionFullName = solution + " Jon Magnuson";
     gender = "boy";
     n = solution.length;
 
-    createSquares();
+    createWordleBoard();
 
     colors = {
         "green": "rgb(83, 141, 78)",
@@ -15,23 +16,35 @@ document.addEventListener("DOMContentLoaded", () => {
         "blue": "rgb(100, 148, 232)"
     };
 
-    currentRow = 1;
+    currentRow = 1; //Tisk Tisk. A Computer Programmer never starts with 1! >:D
     currentArray = [];
     
     const keys = document.querySelectorAll(".keyboard-row button");
 
-    function createSquares() {
+    function createWordleBoard() {
         const gameBoard = document.getElementById("board");
+        createRowOfSquares(6,gameBoard,false);
+        gameBoard.style.setProperty('grid-template-columns', `repeat(${n}, 1fr)`);
+    }
 
-        for (let i = 0; i < 6*n; i++) {
+    function createRowOfSquares(numOfRows, parent, showResults) {
+        for (let i = 0; i < numOfRows*n; i++) {
             let square = document.createElement("div");
             square.classList.add("square");
             /*square.classList.add("animate__animated");*/
             square.setAttribute("id", i + 1);
-            gameBoard.appendChild(square);
+            if(showResults){
+                square.textContent = solution[i];
+                if (gender == "boy") {
+                    square.style.backgroundColor = colors['blue'];
+                    square.style.borderColor = colors['blue'];
+                } else if (gender == "girl") {
+                    square.style.backgroundColor = colors['pink'];
+                    square.style.borderColor = colors['pink'];
+                }
+            }
+            parent.appendChild(square);
         }
-
-        gameBoard.style.setProperty('grid-template-columns', `repeat(${n}, 1fr)`);
     }
 
     function updateCurrentArray(letter) {
@@ -59,8 +72,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         giveClue();
 
-        if (currentArray.join('') == solution) {
-            handleVictory();
+        if (currentArray.join('') == solution.toLowerCase() || currentRow == 6) {
+            showAnswer();
             return;
         }
 
@@ -70,41 +83,20 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
     }
 
-    function handleVictory() {
+    function showAnswer() {
         const gameBoard = document.getElementById("board");
+        gameBoard.innerHTML = '';
+        createRowOfSquares(1,gameBoard,true);
 
-        for (let i = 0; i < 6 * n; i++) {
-            const el = document.getElementById(i + 1);
-
-            if (i < (currentRow - 1) * n || i >= currentRow * n) {
-                gameBoard.removeChild(el);
-            }
-
-            else {
-                //width = Math.floor(300 / n);
-                //el.style.setProperty('width', `${width}%`);
-                //el.style.setProperty('height', `${width}%`);
-                //el.style.setProperty('font-size', `${.9 * width}px`);
-                if (gender == "boy") {
-                    el.style.backgroundColor = colors['blue'];
-                    el.style.borderColor = colors['blue'];
-                } else if (gender == "girl") {
-                    el.style.backgroundColor = colors['pink'];
-                    el.style.borderColor = colors['pink'];
-                }
-                
-            }
-        }
-
-        for (let i = 0; i < solution.length; i++) {
-            const el = document.getElementById(solution[i]);
-            if (gender == "boy") {
-                el.style.backgroundColor = colors['blue'];
-            } else if (gender == "girl") {
-                el.style.backgroundColor = colors['pink'];
-            }
-        }
-
+        /* show fullname */
+        const gameBoardContainer = document.getElementById("board-container");
+        let fullname = document.createElement("div");
+        fullname.textContent = solutionFullName;
+        fullname.classList.add("solution");
+        gameBoardContainer.appendChild(fullname);
+        
+        /* show resutls and share options*/
+        // console.log("show Results and share options");
     }
 
     function charCount(letter, word) {
@@ -120,6 +112,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function giveClue() {
 
         counts = {};
+        solutionLowerCase = solution.toLowerCase();
 
         /* check for greens */
         for (let i = 0; i < n; i++) {
@@ -131,7 +124,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const el_board = document.getElementById((currentRow - 1) * n + i + 1);
             const el_keys = document.getElementById(letter);
             
-            if (letter == solution[i]) {
+            if (letter == solutionLowerCase[i]) {
                 el_board.style.backgroundColor = colors['green'];
                 el_board.style.borderColor = colors['green'];
                 el_keys.style.backgroundColor = colors['green'];
@@ -146,19 +139,19 @@ document.addEventListener("DOMContentLoaded", () => {
             const el_keys = document.getElementById(letter);
 
             /* check for grays */
-            if (!solution.includes(letter)) {
+            if (!solutionLowerCase.includes(letter)) {
                 el_board.style.backgroundColor = colors['gray'];
                 el_board.style.borderColor = colors['gray'];
                 el_keys.style.backgroundColor = colors['gray'];
             }
 
             /* skip the greens */
-            else if (letter == solution[i]) {
+            else if (letter == solutionLowerCase[i]) {
                 continue;
             }
 
             /* check for yellows */
-            else if (counts[letter] < charCount(letter, solution)) {
+            else if (counts[letter] < charCount(letter, solutionLowerCase)) {
                 el_board.style.backgroundColor = colors['yellow'];
                 el_board.style.borderColor = colors['yellow'];
                 if (!el_keys.style.backgroundColor) {
