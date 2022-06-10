@@ -73,6 +73,10 @@ button.icon {
     font-size: 28px;
     font-weight: bold;
   }
+
+  .examples {
+    border-top: 1px solid #888;
+  }
   
   .close:hover,
   .close:focus {
