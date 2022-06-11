@@ -112,9 +112,9 @@ document.addEventListener("DOMContentLoaded", () => {
             if(i%5 == 0){
                 results = results + "\n";
             }
-            if(gameBoard.children[i].style.backgroundColor == "rgb(83, 141, 78)"){
+            if(gameBoard.children[i].classList.contains("green")){
                 results = results + "🟩";
-            }else if(gameBoard.children[i].style.backgroundColor == "rgb(181, 159, 59)"){
+            }else if(gameBoard.children[i].classList.contains("yellow")){
                 results = results + "🟨";
             }else{
                 results = results + "⬛";
