@@ -16,9 +16,75 @@
             <div id="game">
                 <header>
                     <h1 class="title">
-                        BABY NAME WORDLE!!!
+                        BABY NAME WORDLE!
                     </h1>
+                    <button id="help-button" class="icon" aria-label="Help" onclick="openHelpModal()">
+                        <game-icon icon="help">
+                            <svg height="24" width="24">
+                                <path fill="white" d="M11 18h2v-2h-2v2zm1-16C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-14c-2.21 0-4 1.79-4 4h2c0-1.1.9-2 2-2s2 .9 2 2c0 2-3 1.75-3 5h2c0-2.25 3-2.5 3-5 0-2.21-1.79-4-4-4z"></path>
+                            </svg>
+                        </game-icon>
+                    </button>
                 </header>
+
+                <help-modal class="modal" id="helpModalId">
+                    <div class="modal-content">
+                        <span class="close" onclick="closeHelpModal()">&times;</span>
+                        <p>Guess the babie's name in six tries. Hit the enter button to submit your guess.</p>
+                        <p>After each guess, the color of the tiles will change to show how close your guess was to the name.</p>
+                        <div class="examples">
+                            <p>
+                                <strong>Examples</strong>
+                            </p>
+                            <!-- Example 1 -->
+                            <div class="exampleBoard">
+                                <div class="square gray example">S</div>
+                                <div class="square green example">A</div>
+                                <div class="square gray example">R</div>
+                                <div class="square gray example">A</div>
+                                <div class="square gray example">H</div>
+                            </div>
+                            <p>
+                                The letter "
+                                <strong>A</strong>
+                                " is in the name and in the correct spot.
+                            </p>
+                            <!-- Example 2 -->
+                            <div class="exampleBoard">
+                                <div class="square gray example">K</div>
+                                <div class="square gray example">L</div>
+                                <div class="square yellow example">A</div>
+                                <div class="square gray example">U</div>
+                                <div class="square gray example">S</div>
+                            </div>
+                            <p>
+                                The letter "
+                                <strong>A</strong>
+                                " is in the name but in the wrong spot.
+                            </p>
+                            <!-- Example 3 : Klaus -->
+                            <div class="exampleBoard">
+                                <div class="square yellow example">A</div>
+                                <div class="square gray example">R</div>
+                                <div class="square yellow example">I</div>
+                                <div class="square gray example">E</div>
+                                <div class="square gray example">L</div>
+                            </div>
+                            <p>
+                                The letters "
+                                <strong>R</strong>", "
+                                <strong>E</strong>", and " 
+                                <strong>L</strong>
+                                "  is not in the name in any spot.
+                            </p>
+                            <p>
+                                Answer for these examples is: "
+                                <strong>David</strong>
+                                "
+                            </p>
+                        </div>
+                    </div>
+                </help-modal>
 
                 <div id="board-container">
                     <div id="board"></div>

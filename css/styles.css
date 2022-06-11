@@ -28,7 +28,62 @@ body {
 
 header {
     border-bottom: 1px solid rgb(58, 58, 60);
+    display: flex;
+    gap: 25px;
 }
+
+button.icon {
+    border: none;
+    cursor: pointer;
+    background: none;
+    padding: 0 4px;
+}
+
+.modal {
+    display: block; /* Shown by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 5%; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow-y: scroll;
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+
+  /* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 10px;
+    border: 1px solid #888;
+    width: 80%;
+  }
+
+  .modal-content p {
+    margin: 16px;
+  }
+  
+  /* The Close Button for Modal*/
+  .close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+
+  .examples {
+    border-top: 1px solid #888;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+  }
 
 .title {
     color: gainsboro;
@@ -44,13 +99,21 @@ header {
     justify-content: center;
     align-items: center;
     flex-grow: 1;
-    overflow: hidden;
+    /* overflow: hidden; */
     flex-direction: column;
 }
 
 #board {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
+    grid-gap: 5px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.exampleBoard {
+    display: flex;
+    width: 500px;
     grid-gap: 5px;
     padding: 10px;
     box-sizing: border-box;
@@ -67,6 +130,38 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.square.green {
+    background-color: rgb(83, 141, 78);
+    border-color: rgb(83, 141, 78);
+}
+
+.square.yellow {
+    background-color: rgb(181, 159, 59);
+    border-color: rgb(181, 159, 59);
+}
+
+.square.gray {
+    background-color: rgb(58, 58, 60);
+    border-color: rgb(58, 58, 60);
+}
+
+.square.pink {
+    background-color: rgb(194, 83, 161);
+    border-color: rgb(194, 83, 161);
+}
+
+.square.blue {
+    background-color: rgb(100, 148, 232);
+    border-color: rgb(100, 148, 232);
+}
+
+.square.example {
+    color: white;
+    min-width: 35px;
+    min-height: 35px;
+    font-size: 25px;
 }
 
 .solution {
@@ -106,6 +201,18 @@ header {
     margin-right: 6px;
     border-radius: 4px;
     user-select: none;
+}
+
+.keyboard-row .green{
+    background-color: rgb(83, 141, 78);
+}
+
+.keyboard-row .yellow {
+    background-color: rgb(181, 159, 59);
+}
+
+.keyboard-row .gray {
+    background-color: rgb(58, 58, 60);
 }
 
 .keyboard-row button.wide-button {
