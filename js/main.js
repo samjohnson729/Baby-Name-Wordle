@@ -72,12 +72,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
         giveClue();
 
-        if (currentArray.join('') == solution.toLowerCase() || currentRow == 6) {
+        if (currentArray.join('') == solution.toLowerCase()) {
             showAnswer();
             return;
         }
 
         currentRow = currentRow + 1
+
+        if(currentRow > 6){
+            showAnswer();
+            return;
+        }
+
         currentArray = []
 
         return;
@@ -85,6 +91,29 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function showAnswer() {
         const gameBoard = document.getElementById("board");
+
+        /* collect Results */
+        let results = "Baby Name Wordle ";
+        if(currentRow > 6){
+            results = results + "X/6";
+        }else{
+            results = results + currentRow +"/6";
+        }
+
+        for (let i = 0; i < currentRow*n; i++) {
+            if(i%5 == 0){
+                results = results + "\n";
+            }
+            if(gameBoard.children[i].style.backgroundColor == "rgb(83, 141, 78)"){
+                results = results + "🟩";
+            }else if(gameBoard.children[i].style.backgroundColor == "rgb(181, 159, 59)"){
+                results = results + "🟨";
+            }else{
+                results = results + "⬛";
+            }
+        }
+
+        /* Clear board and show answer */
         gameBoard.innerHTML = '';
         createRowOfSquares(1,gameBoard,true);
 
@@ -96,7 +125,7 @@ document.addEventListener("DOMContentLoaded", () => {
         gameBoardContainer.appendChild(fullname);
         
         /* show resutls and share options*/
-        // console.log("show Results and share options");
+        console.log(results);
     }
 
     function charCount(letter, word) {
