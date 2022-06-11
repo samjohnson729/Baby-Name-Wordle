@@ -111,6 +111,14 @@ button.icon {
     box-sizing: border-box;
 }
 
+.exampleBoard {
+    display: flex;
+    width: 500px;
+    grid-gap: 5px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
 .square {
     border: 2px solid rgb(58, 58, 60);
     min-width: 55px;
@@ -122,6 +130,38 @@ button.icon {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.square.green {
+    background-color: rgb(83, 141, 78);
+    border-color: rgb(83, 141, 78);
+}
+
+.square.yellow {
+    background-color: rgb(181, 159, 59);
+    border-color: rgb(181, 159, 59);
+}
+
+.square.gray {
+    background-color: rgb(58, 58, 60);
+    border-color: rgb(58, 58, 60);
+}
+
+.square.pink {
+    background-color: rgb(194, 83, 161);
+    border-color: rgb(194, 83, 161);
+}
+
+.square.blue {
+    background-color: rgb(100, 148, 232);
+    border-color: rgb(100, 148, 232);
+}
+
+.square.example {
+    color: white;
+    min-width: 45px;
+    min-height: 45px;
+    font-size: 35px;
 }
 
 .solution {
@@ -161,6 +201,18 @@ button.icon {
     margin-right: 6px;
     border-radius: 4px;
     user-select: none;
+}
+
+.keyboard-row .green{
+    background-color: rgb(83, 141, 78);
+}
+
+.keyboard-row .yellow {
+    background-color: rgb(181, 159, 59);
+}
+
+.keyboard-row .gray {
+    background-color: rgb(58, 58, 60);
 }
 
 .keyboard-row button.wide-button {

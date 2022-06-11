@@ -25,16 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     createWordleBoard();
 
-    colors = {
-        "green": "rgb(83, 141, 78)",
-        "gray": "rgb(58, 58, 60)",
-        "yellow": "rgb(181, 159, 59)",
-        "black": "rgb(0, 0, 0)",
-        "pink": "rgb(194, 83, 161)",
-        "blue": "rgb(100, 148, 232)"
-    };
-
-    currentRow = 1; //Tisk Tisk. A Computer Programmer never starts with 1! >:D
+    currentRow = 1;
     currentArray = [];
     
     const keys = document.querySelectorAll(".keyboard-row button");
@@ -54,11 +45,9 @@ document.addEventListener("DOMContentLoaded", () => {
             if(showResults){
                 square.textContent = solution[i];
                 if (gender == "boy") {
-                    square.style.backgroundColor = colors['blue'];
-                    square.style.borderColor = colors['blue'];
+                    square.classList.add("blue");
                 } else if (gender == "girl") {
-                    square.style.backgroundColor = colors['pink'];
-                    square.style.borderColor = colors['pink'];
+                    square.classList.add("pink");
                 }
             }
             parent.appendChild(square);
@@ -143,9 +132,8 @@ document.addEventListener("DOMContentLoaded", () => {
             const el_keys = document.getElementById(letter);
             
             if (letter == solutionLowerCase[i]) {
-                el_board.style.backgroundColor = colors['green'];
-                el_board.style.borderColor = colors['green'];
-                el_keys.style.backgroundColor = colors['green'];
+                el_board.classList.add("green");
+                el_keys.classList.add("green");
                 counts[letter] += 1;
             }
         }
@@ -158,9 +146,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
             /* check for grays */
             if (!solutionLowerCase.includes(letter)) {
-                el_board.style.backgroundColor = colors['gray'];
-                el_board.style.borderColor = colors['gray'];
-                el_keys.style.backgroundColor = colors['gray'];
+                el_board.classList.add("gray");
+                el_keys.classList.add("gray");
             }
 
             /* skip the greens */
@@ -170,16 +157,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
             /* check for yellows */
             else if (counts[letter] < charCount(letter, solutionLowerCase)) {
-                el_board.style.backgroundColor = colors['yellow'];
-                el_board.style.borderColor = colors['yellow'];
+                el_board.classList.add("yellow");
                 if (!el_keys.style.backgroundColor) {
-                    el_keys.style.backgroundColor = colors['yellow'];
+                    el_keys.classList.add("yellow");
                 }
                 counts[letter] += 1;
             }
 
             else {
-                el_board.style.backgroundColor = colors['gray'];
+                el_board.classList.add("gray");
             }
         }
 
