@@ -16,6 +16,16 @@ function openHelpModal(){
     helpModal.style.display = "block";
 }
 
+function closeResultsModal(){
+    const resultsModal = document.getElementById("resultsModalId");
+    resultsModal.style.display = "none";
+}
+
+function openResultsModal(){
+    const resultsModal = document.getElementById("resultsModalId");
+    resultsModal.style.display = "block";
+}
+
 document.addEventListener("DOMContentLoaded", () => {
 
     solution = "David";
@@ -32,24 +42,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function createWordleBoard() {
         const gameBoard = document.getElementById("board");
-        createRowOfSquares(6,gameBoard,false);
+        createRowOfSquares(6,gameBoard);
         gameBoard.style.setProperty('grid-template-columns', `repeat(${n}, 1fr)`);
     }
 
-    function createRowOfSquares(numOfRows, parent, showResults) {
+    function createRowOfSquares(numOfRows, parent) {
         for (let i = 0; i < numOfRows*n; i++) {
             let square = document.createElement("div");
             square.classList.add("square");
             /*square.classList.add("animate__animated");*/
             square.setAttribute("id", i + 1);
-            if(showResults){
-                square.textContent = solution[i];
-                if (gender == "boy") {
-                    square.classList.add("blue");
-                } else if (gender == "girl") {
-                    square.classList.add("pink");
-                }
-            }
             parent.appendChild(square);
         }
     }
@@ -97,9 +99,24 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function showAnswer() {
-        const gameBoard = document.getElementById("board");
+
+        /* Show answer on modal */
+        for (let i = 0; i < n; i++) {
+            const resultSquare = document.getElementById("babyName"+i);
+            if (gender == "boy") {
+                resultSquare.classList.add("blue");
+            } else if (gender == "girl") {
+                resultSquare.classList.add("pink");
+            }
+            resultSquare.textContent = solution[i];
+        }
+
+        /* Show fullname on modal*/
+        const babyFullNameDiv = document.getElementById("babyFullName");
+        babyFullNameDiv.textContent = solutionFullName;
 
         /* collect Results */
+        const gameBoard = document.getElementById("board");
         let results = "Baby Name Wordle ";
         if(currentRow > 6){
             results = results + "X/6";
@@ -121,19 +138,15 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }
 
-        /* Clear board and show answer */
-        gameBoard.innerHTML = '';
-        createRowOfSquares(1,gameBoard,true);
-
-        /* show fullname */
-        const gameBoardContainer = document.getElementById("board-container");
-        let fullname = document.createElement("div");
-        fullname.textContent = solutionFullName;
-        fullname.classList.add("solution");
-        gameBoardContainer.appendChild(fullname);
-        
-        /* show resutls and share options*/
+        /* show resutls on modal*/
         console.log(results);
+        const resultsView = document.getElementById("resultsView");
+        resultsView.textContent = results;
+
+        /* Show modal*/
+        const resultsModal = document.getElementById("resultsModalId");
+        resultsModal.style.display = "block";
+
     }
 
     function charCount(letter, word) {
