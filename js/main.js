@@ -101,29 +101,43 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function showAnswer() {
 
+         /* Set fullname on modal*/
+         const babyFullNameDiv = document.getElementById("babyFullName");
+         babyFullNameDiv.textContent = solutionFullName;
+
         /* Show answer on modal */
+        let genderColor;
+        const genderRevealDiv = document.getElementById("genderReveal");
+
+        if (gender == "boy") {
+            genderColor="blue";
+            babyFullNameDiv.style.color = "rgb(100, 148, 232)";
+            genderRevealDiv.style.color = "rgb(100, 148, 232)";
+            genderRevealDiv.textContent = "It's a Boy!"
+        } else if (gender == "girl") {
+            genderColor="pink";
+            babyFullNameDiv.style.color = "rgb(194, 83, 161)";
+            genderRevealDiv.style.color = "rgb(194, 83, 161)";
+            genderRevealDiv.textContent = "It's a Girl!"
+        }
+
         for (let i = 0; i < n; i++) {
             const resultSquare = document.getElementById("babyName"+i);
-            if (gender == "boy") {
-                resultSquare.classList.add("blue");
-            } else if (gender == "girl") {
-                resultSquare.classList.add("pink");
-            }
+            resultSquare.classList.add(genderColor);
             resultSquare.textContent = solution[i];
         }
 
-        /* Show fullname on modal*/
-        const babyFullNameDiv = document.getElementById("babyFullName");
-        babyFullNameDiv.textContent = solutionFullName;
-
         /* collect Results */
         const gameBoard = document.getElementById("board");
+        const endMessage = document.getElementById("endMessage");
         results = "Baby Name Wordle ";
         if(currentRow > 6){
             results = results + "X/6";
             currentRow = 6; // For the results collection for loop.
+            endMessage.textContent = "Uffda!";
         }else{
             results = results + currentRow +"/6";
+            endMessage.textContent = "Good Job!";
         }
 
         for (let i = 0; i < currentRow*n; i++) {
