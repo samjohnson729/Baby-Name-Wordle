@@ -96,6 +96,7 @@ document.addEventListener("DOMContentLoaded", () => {
         let results = "Baby Name Wordle ";
         if(currentRow > 6){
             results = results + "X/6";
+            currentRow = 6; // For the results collection for loop.
         }else{
             results = results + currentRow +"/6";
         }
