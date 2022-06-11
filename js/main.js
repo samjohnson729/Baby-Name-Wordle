@@ -1,3 +1,5 @@
+let results;
+
 //When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {
     const helpModal = document.getElementById("helpModalId");
@@ -21,9 +23,8 @@ function closeResultsModal(){
     resultsModal.style.display = "none";
 }
 
-function openResultsModal(){
-    const resultsModal = document.getElementById("resultsModalId");
-    resultsModal.style.display = "block";
+function copyResultsToClipboard(){
+    navigator.clipboard.writeText(results);
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -117,7 +118,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         /* collect Results */
         const gameBoard = document.getElementById("board");
-        let results = "Baby Name Wordle ";
+        results = "Baby Name Wordle ";
         if(currentRow > 6){
             results = results + "X/6";
             currentRow = 6; // For the results collection for loop.
