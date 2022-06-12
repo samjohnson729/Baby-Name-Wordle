@@ -1,3 +1,5 @@
+let results;
+
 //When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {
     const helpModal = document.getElementById("helpModalId");
@@ -16,11 +18,20 @@ function openHelpModal(){
     helpModal.style.display = "block";
 }
 
+function closeResultsModal(){
+    const resultsModal = document.getElementById("resultsModalId");
+    resultsModal.style.display = "none";
+}
+
+function copyResultsToClipboard(){
+    navigator.clipboard.writeText(results);
+}
+
 document.addEventListener("DOMContentLoaded", () => {
 
-    solution = "David";
-    solutionFullName = solution + " Jon Magnuson";
-    gender = "boy";
+    solution = "Chloe";
+    solutionFullName = solution + " Sue Magnuson";
+    gender = "girl";
     n = solution.length;
 
     createWordleBoard();
@@ -32,24 +43,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function createWordleBoard() {
         const gameBoard = document.getElementById("board");
-        createRowOfSquares(6,gameBoard,false);
+        createRowOfSquares(6,gameBoard);
         gameBoard.style.setProperty('grid-template-columns', `repeat(${n}, 1fr)`);
     }
 
-    function createRowOfSquares(numOfRows, parent, showResults) {
+    function createRowOfSquares(numOfRows, parent) {
         for (let i = 0; i < numOfRows*n; i++) {
             let square = document.createElement("div");
             square.classList.add("square");
             /*square.classList.add("animate__animated");*/
             square.setAttribute("id", i + 1);
-            if(showResults){
-                square.textContent = solution[i];
-                if (gender == "boy") {
-                    square.classList.add("blue");
-                } else if (gender == "girl") {
-                    square.classList.add("pink");
-                }
-            }
             parent.appendChild(square);
         }
     }
@@ -79,31 +82,88 @@ document.addEventListener("DOMContentLoaded", () => {
 
         giveClue();
 
-        if (currentArray.join('') == solution.toLowerCase() || currentRow == 6) {
+        if (currentArray.join('') == solution.toLowerCase()) {
             showAnswer();
             return;
         }
 
         currentRow = currentRow + 1
+
+        if(currentRow > 6){
+            showAnswer();
+            return;
+        }
+
         currentArray = []
 
         return;
     }
 
     function showAnswer() {
-        const gameBoard = document.getElementById("board");
-        gameBoard.innerHTML = '';
-        createRowOfSquares(1,gameBoard,true);
 
-        /* show fullname */
-        const gameBoardContainer = document.getElementById("board-container");
-        let fullname = document.createElement("div");
-        fullname.textContent = solutionFullName;
-        fullname.classList.add("solution");
-        gameBoardContainer.appendChild(fullname);
+         /* Set fullname on modal*/
+         const babyFullNameDiv = document.getElementById("babyFullName");
+         babyFullNameDiv.textContent = solutionFullName;
+
+        /* Show answer on modal */
+        let genderColor;
+        const genderRevealDiv = document.getElementById("genderReveal");
+
+        if (gender.toLowerCase() == "boy") {
+            genderColor="blue";
+            babyFullNameDiv.style.color = "rgb(100, 148, 232)";
+            genderRevealDiv.style.color = "rgb(100, 148, 232)";
+            genderRevealDiv.textContent = "It's a Boy!"
+        } else if (gender.toLowerCase() == "girl") {
+            genderColor="pink";
+            babyFullNameDiv.style.color = "rgb(194, 83, 161)";
+            genderRevealDiv.style.color = "rgb(194, 83, 161)";
+            genderRevealDiv.textContent = "It's a Girl!"
+        }
+
+        for (let i = 0; i < n; i++) {
+            const resultSquare = document.getElementById("babyName"+i);
+            resultSquare.classList.add(genderColor);
+            resultSquare.textContent = solution[i];
+        }
+
+        /* collect Results */
+        const gameBoard = document.getElementById("board");
+        const endMessage = document.getElementById("endMessage");
+        results = "Baby Name Wordle ";
+        if(currentRow > 6){
+            results = results + "X/6";
+            currentRow = 6; // For the results collection for loop.
+            endMessage.textContent = "Uffda!";
+        }else{
+            results = results + currentRow +"/6";
+            endMessage.textContent = "Good Job!";
+        }
+
+        for (let i = 0; i < currentRow*n; i++) {
+            if(i%5 == 0){
+                results = results + "\r\n";
+            }
+            if(gameBoard.children[i].classList.contains("green")){
+                results = results + "🟩";
+            }else if(gameBoard.children[i].classList.contains("yellow")){
+                results = results + "🟨";
+            }else{
+                results = results + "⬛";
+            }
+        }
+
+        /* show resutls on modal*/
+        console.log(results);
+        const resultsView = document.getElementById("resultsView");
+        resultsView.textContent = results;
         
-        /* show resutls and share options*/
-        // console.log("show Results and share options");
+        // resultsView.textContent = results.replace(/(?:\r\n|\r|\n)/g, '<br>');
+
+        /* Show modal*/
+        const resultsModal = document.getElementById("resultsModalId");
+        resultsModal.style.display = "block";
+
     }
 
     function charCount(letter, word) {
