@@ -29,9 +29,9 @@ function copyResultsToClipboard(){
 
 document.addEventListener("DOMContentLoaded", () => {
 
-    solution = "David";
-    solutionFullName = solution + " Jon Magnuson";
-    gender = "boy";
+    solution = "Chloe";
+    solutionFullName = solution + " Sue Magnuson";
+    gender = "girl";
     n = solution.length;
 
     createWordleBoard();
@@ -109,12 +109,12 @@ document.addEventListener("DOMContentLoaded", () => {
         let genderColor;
         const genderRevealDiv = document.getElementById("genderReveal");
 
-        if (gender == "boy") {
+        if (gender.toLowerCase() == "boy") {
             genderColor="blue";
             babyFullNameDiv.style.color = "rgb(100, 148, 232)";
             genderRevealDiv.style.color = "rgb(100, 148, 232)";
             genderRevealDiv.textContent = "It's a Boy!"
-        } else if (gender == "girl") {
+        } else if (gender.toLowerCase() == "girl") {
             genderColor="pink";
             babyFullNameDiv.style.color = "rgb(194, 83, 161)";
             genderRevealDiv.style.color = "rgb(194, 83, 161)";
@@ -142,7 +142,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         for (let i = 0; i < currentRow*n; i++) {
             if(i%5 == 0){
-                results = results + "\n";
+                results = results + "\r\n";
             }
             if(gameBoard.children[i].classList.contains("green")){
                 results = results + "🟩";
@@ -157,6 +157,8 @@ document.addEventListener("DOMContentLoaded", () => {
         console.log(results);
         const resultsView = document.getElementById("resultsView");
         resultsView.textContent = results;
+        
+        // resultsView.textContent = results.replace(/(?:\r\n|\r|\n)/g, '<br>');
 
         /* Show modal*/
         const resultsModal = document.getElementById("resultsModalId");

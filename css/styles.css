@@ -43,6 +43,19 @@ button.icon {
     display: none;
 }
 
+#resultsView {
+    white-space: pre;
+    text-align: center;
+}
+
+#scoreView {
+    text-align: center;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 #results {
     border-top: 1px solid #888;
     padding-top: 10px;
@@ -70,6 +83,7 @@ button.icon {
     padding: 10px;
     border: 1px solid #888;
     width: 80%;
+    max-width: 500px;
   }
 
   .modal-content p {
