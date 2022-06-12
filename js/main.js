@@ -25,6 +25,11 @@ function closeResultsModal(){
 
 function copyResultsToClipboard(){
     navigator.clipboard.writeText(results);
+    const toasterDiv = document.getElementById("toaster");
+    toasterDiv.textContent = "Copied results to clipboard.";
+    toasterDiv.className = "show";
+    setTimeout(function(){ toasterDiv.className = toasterDiv.className.replace("show", ""); }, 1500);
+    
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -76,7 +81,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function handleEnterLetter() {
         if (currentArray.length !== n) {
-            window.alert("Must enter full guess before submitting!");
+            const toasterDiv = document.getElementById("toaster");
+            toasterDiv.textContent = "Not enough letters.";
+            toasterDiv.className = "show";
+            setTimeout(function(){ toasterDiv.className = toasterDiv.className.replace("show", ""); }, 1500);
             return;
         }
 
@@ -158,8 +166,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const resultsView = document.getElementById("resultsView");
         resultsView.textContent = results;
         
-        // resultsView.textContent = results.replace(/(?:\r\n|\r|\n)/g, '<br>');
-
         /* Show modal*/
         const resultsModal = document.getElementById("resultsModalId");
         resultsModal.style.display = "block";
