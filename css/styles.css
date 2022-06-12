@@ -6,12 +6,12 @@
 html,
 body {
     height: 100%;
+    background-color: black;
     font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
 
 #container {
     display: flex;
-    background-color: black;
     height: 100%;
     align-items: center;
     flex-direction: column;
