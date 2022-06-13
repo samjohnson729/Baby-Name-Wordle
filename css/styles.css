@@ -29,7 +29,8 @@ body {
 header {
     border-bottom: 1px solid rgb(58, 58, 60);
     display: flex;
-    gap: 25px;
+    float: right;
+    /* gap: 25px; */
 }
 
 button.icon {
@@ -132,8 +133,10 @@ button.icon {
   }
 
 .title {
+    flex-grow: 3;
     color: gainsboro;
-    font-size: 2.5rem;
+    font-size:  min(8vw, 42px);;
+    white-space: nowrap;
     font-weight: bold;
     margin: 0.4rem 0 0.4rem 0;
     text-align: center;
