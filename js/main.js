@@ -34,8 +34,8 @@ function copyResultsToClipboard(){
 
 document.addEventListener("DOMContentLoaded", () => {
 
-    solution = "Chloe";
-    solutionFullName = solution + " Sue Magnuson";
+    solution = "Ember";
+    solutionFullName = solution + " Hope Magnuson";
     gender = "girl";
     n = solution.length;
 
